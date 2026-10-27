@@ -240,6 +240,15 @@ void main() {
       expect(csv.mimeType, 'text/csv');
       expect(csv.contents.trim().split('\r\n'), hasLength(31));
 
+      await tester.tap(find.byKey(const Key('export-tcx')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('export-tcx-running')));
+      await tester.pumpAndSettle();
+      final tcx = fileSaver.saved.last;
+      expect(tcx.fileName, endsWith('.tcx'));
+      expect(tcx.contents, contains('<Activity Sport="Running">'));
+      expect('<Trackpoint>'.allMatches(tcx.contents), hasLength(30));
+
       await tester.tap(find.byKey(const Key('delete-session')));
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('confirm-delete')));

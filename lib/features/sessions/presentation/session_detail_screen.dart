@@ -9,6 +9,7 @@ import '../../monitor/presentation/widgets/live_cards.dart';
 import '../../monitor/presentation/widgets/zone_time_bars.dart';
 import '../domain/recorded_session.dart';
 import '../domain/session_stats.dart';
+import '../domain/tcx_export.dart';
 import 'sessions_controller.dart';
 
 /// Summary of one recording, with export and delete.
@@ -226,6 +227,32 @@ class _Summary extends ConsumerWidget {
                       _export(context, () => controller.exportCsv(session)),
                   icon: const Icon(Icons.table_chart_outlined),
                   label: Text(l10n.exportCsv),
+                ),
+                MenuAnchor(
+                  menuChildren: [
+                    for (final sport in TcxSport.values)
+                      MenuItemButton(
+                        key: Key('export-tcx-${sport.name}'),
+                        onPressed: () => _export(
+                          context,
+                          () => controller.exportTcx(session, sport),
+                        ),
+                        child: Text(switch (sport) {
+                          TcxSport.running => l10n.tcxSportRunning,
+                          TcxSport.biking => l10n.tcxSportBiking,
+                          TcxSport.other => l10n.tcxSportOther,
+                        }),
+                      ),
+                  ],
+                  builder: (context, menu, _) => Tooltip(
+                    message: l10n.exportTcxHint,
+                    child: FilledButton.tonalIcon(
+                      key: const Key('export-tcx'),
+                      onPressed: () => menu.isOpen ? menu.close() : menu.open(),
+                      icon: const Icon(Icons.directions_run),
+                      label: Text(l10n.exportTcx),
+                    ),
+                  ),
                 ),
               ],
             ),

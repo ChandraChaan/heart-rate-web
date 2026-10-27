@@ -7,6 +7,7 @@ import '../domain/csv_export.dart';
 import '../domain/recorded_session.dart';
 import '../domain/session_repository.dart';
 import '../domain/session_stats.dart';
+import '../domain/tcx_export.dart';
 
 final sessionRepositoryProvider = Provider<SessionRepository>(
   (ref) => BrowserSessionRepository(ref.watch(sharedPreferencesProvider)),
@@ -60,5 +61,14 @@ class SessionsController extends AsyncNotifier<List<RecordedSession>> {
         fileName: exportFileName(session, 'csv'),
         mimeType: 'text/csv',
         contents: sessionToCsv(session),
+      );
+
+  /// Downloads [session] as TCX, for training apps.
+  Future<void> exportTcx(RecordedSession session, TcxSport sport) => ref
+      .read(fileSaverProvider)
+      .save(
+        fileName: exportFileName(session, 'tcx'),
+        mimeType: 'application/vnd.garmin.tcx+xml',
+        contents: sessionToTcx(session, sport: sport),
       );
 }
