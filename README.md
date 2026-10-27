@@ -20,7 +20,7 @@ Use any Bluetooth heart-rate strap in the browser. Open the page, pick your stra
 - **Live view:** big bpm readout, a scrolling three-minute chart drawn over coloured zone bands, the current zone, battery level, where the sensor is worn, and a warning when the strap loses skin contact.
 - **Heart-rate zones** from your age (220 − age) or a measured max HR, with time spent in each zone.
 - **HRV (RMSSD)** over the last minute, when the strap sends RR-intervals. Artefacts and missed beats are filtered out.
-- **Recording:** start and stop a session, see average, min and max heart rate, duration, time in zones, HRV and energy, and export it as **CSV**.
+- **Recording:** start and stop a session, see average, min and max heart rate, duration, time in zones, HRV and energy, and export it as **CSV** for spreadsheets or **TCX** for Strava, Garmin Connect, TrainingPeaks and other training apps.
 - **Reconnects** by itself when the strap drops out of range, and offers a manual retry if it stays away. A recording keeps going through the gap.
 - **Demo mode** runs a simulated chest strap through exactly the same code, clearly labelled *Simulated*, so anyone can try the app.
 
@@ -54,7 +54,7 @@ This is a hobby and training tool, not a medical device. Don't use it to diagnos
 ```
 Web Bluetooth strap ─┐
                      ├─> HeartRateLink ─> ble_gatt_parser ─> controllers ─┬─> live view
-Simulated strap ─────┘   (raw bytes)      (typed values)     (Riverpod)   └─> recorder ─> local storage ─> CSV
+Simulated strap ─────┘   (raw bytes)      (typed values)     (Riverpod)   └─> recorder ─> local storage ─> CSV, TCX
 ```
 
 - [`flutter_web_bluetooth`](https://pub.dev/packages/flutter_web_bluetooth) talks to the strap. It sits behind two small interfaces, `HeartRateConnector` and `HeartRateLink`, in [`lib/features/monitor/domain/heart_rate_link.dart`](lib/features/monitor/domain/heart_rate_link.dart).

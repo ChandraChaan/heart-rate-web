@@ -361,6 +361,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exportCsv => 'Export CSV';
 
   @override
+  String get exportTcx => 'Export TCX';
+
+  @override
+  String get exportTcxHint =>
+      'For Strava, Garmin Connect and other training apps';
+
+  @override
+  String get tcxSportRunning => 'As a run';
+
+  @override
+  String get tcxSportBiking => 'As a ride';
+
+  @override
+  String get tcxSportOther => 'As another workout';
+
+  @override
   String get exportFailed => 'Couldn\'t create the file.';
 
   @override

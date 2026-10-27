@@ -706,6 +706,36 @@ abstract class AppLocalizations {
   /// **'Export CSV'**
   String get exportCsv;
 
+  /// No description provided for @exportTcx.
+  ///
+  /// In en, this message translates to:
+  /// **'Export TCX'**
+  String get exportTcx;
+
+  /// No description provided for @exportTcxHint.
+  ///
+  /// In en, this message translates to:
+  /// **'For Strava, Garmin Connect and other training apps'**
+  String get exportTcxHint;
+
+  /// No description provided for @tcxSportRunning.
+  ///
+  /// In en, this message translates to:
+  /// **'As a run'**
+  String get tcxSportRunning;
+
+  /// No description provided for @tcxSportBiking.
+  ///
+  /// In en, this message translates to:
+  /// **'As a ride'**
+  String get tcxSportBiking;
+
+  /// No description provided for @tcxSportOther.
+  ///
+  /// In en, this message translates to:
+  /// **'As another workout'**
+  String get tcxSportOther;
+
   /// No description provided for @exportFailed.
   ///
   /// In en, this message translates to:
